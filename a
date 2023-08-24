@@ -1,0 +1,889 @@
+private lateinit var textView1: TextView
+private lateinit var textView2: TextView
+private lateinit var textView3: TextView
+private lateinit var textView4: TextView
+private lateinit var textView5: TextView
+private lateinit var textView6: TextView
+private lateinit var textView7: TextView
+private lateinit var textView8: TextView
+private lateinit var textView9: TextView
+private lateinit var textView10: TextView
+
+private lateinit var textViewBack: TextView
+private lateinit var Back : ImageButton
+
+private lateinit var textViewHome: TextView
+private lateinit var imageHome : ImageButton
+
+private lateinit var textViewExam: TextView
+private lateinit var EXAM : ImageButton
+
+private lateinit var view1jd: View
+private lateinit var view2jd: View
+private lateinit var view3jd: View
+private lateinit var view4jd: View
+private lateinit var view5jd: View
+private lateinit var view6jd: View
+private lateinit var view7jd: View
+private lateinit var view8jd: View
+private lateinit var view9jd: View
+private lateinit var view10jd: View
+
+
+
+private lateinit var mediaPlayer: Array<MediaPlayer>
+private lateinit var playButtons: Array<Button>
+private lateinit var isPlaying: BooleanArray
+private lateinit var viewsArray: Array<View>
+
+
+
+
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    textView1 = findViewById(R.id.textView1)
+    textView2 = findViewById(R.id.textView2)
+    textView3 = findViewById(R.id.textView3)
+    textView4 = findViewById(R.id.textView4)
+    textView5 = findViewById(R.id.textView5)
+    textView6 = findViewById(R.id.textView6)
+    textView7 = findViewById(R.id.textView7)
+    textView8 = findViewById(R.id.textView8)
+    textView9 = findViewById(R.id.textView9)
+    textView10 = findViewById(R.id.textView10)
+
+    view1jd = findViewById(R.id.View1jd)
+    view2jd = findViewById(R.id.View2jd)
+    view3jd = findViewById(R.id.View3jd)
+    view4jd = findViewById(R.id.View4jd)
+    view5jd = findViewById(R.id.View5jd)
+    view6jd = findViewById(R.id.View6jd)
+    view7jd = findViewById(R.id.View7jd)
+    view8jd = findViewById(R.id.View8jd)
+    view9jd = findViewById(R.id.View9jd)
+    view10jd = findViewById(R.id.View10jd)
+
+
+    textViewExam = findViewById(R.id.textViewExam)
+    textViewHome = findViewById(R.id.textViewHome)
+    textViewBack = findViewById(R.id.textViewBack)
+    Back = findViewById(R.id.Back)
+    imageHome = findViewById(R.id.imageHome)
+    EXAM = findViewById(R.id.EXAM)
+
+
+    viewsArray = arrayOf(
+        findViewById(R.id.View1jd),
+        findViewById(R.id.View2jd),
+        findViewById(R.id.View3jd),
+        findViewById(R.id.View4jd),
+        findViewById(R.id.View5jd),
+        findViewById(R.id.View6jd),
+        findViewById(R.id.View7jd),
+        findViewById(R.id.View8jd),
+        findViewById(R.id.View9jd),
+        findViewById(R.id.View10jd)
+   )
+
+    textView1.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                textView1.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView1.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView1.visibility = View.INVISIBLE
+                        view1jd.visibility = View.VISIBLE
+                        textViewExam.visibility = View.VISIBLE
+                        EXAM.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                textView1.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView1.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView1.visibility = View.INVISIBLE
+                        view1jd.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+
+    Back.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                Back.animate().scaleX(2.75f).scaleY(2.75f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView1.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView1.visibility = View.VISIBLE
+                        view1jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView1.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                        textViewBack.visibility = View.INVISIBLE
+                        Back.visibility = View.INVISIBLE
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                Back.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView1.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView1.visibility = View.VISIBLE
+                        view1jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView1.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+
+
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+
+
+    textView2.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                textView2.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView2.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView2.visibility = View.INVISIBLE
+                        view2jd.visibility = View.VISIBLE
+                        textViewExam.visibility = View.VISIBLE
+                        EXAM.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                textView2.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView2.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView2.visibility = View.INVISIBLE
+                        view2jd.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+
+    Back.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                Back.animate().scaleX(2.75f).scaleY(2.75f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView2.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView2.visibility = View.VISIBLE
+                        view2jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView2.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                        textViewBack.visibility = View.INVISIBLE
+                        Back.visibility = View.INVISIBLE
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                Back.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView2.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView2.visibility = View.VISIBLE
+                        view2jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView2.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+
+
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+
+
+    textView3.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                textView3.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView3.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView3.visibility = View.INVISIBLE
+                        view3jd.visibility = View.VISIBLE
+                        textViewExam.visibility = View.VISIBLE
+                        EXAM.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                textView3.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView3.visibility = View.VISIBLE
+                    Handler().postDelayed({
+
+                        textView3.visibility = View.INVISIBLE
+                        view3jd.visibility = View.VISIBLE
+                        imageHome.visibility = View.VISIBLE
+                        textViewHome.visibility = View.VISIBLE
+                        textViewBack.visibility = View.VISIBLE
+                        Back.visibility = View.VISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+
+    Back.setOnTouchListener { view, motionEvent ->
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                // تأثير عند الضغط على الزر
+                Back.animate().scaleX(2.75f).scaleY(2.75f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView3.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView3.visibility = View.VISIBLE
+                        view3jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView3.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+                        textViewBack.visibility = View.INVISIBLE
+                        Back.visibility = View.INVISIBLE
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+            MotionEvent.ACTION_UP -> {
+                // تأثير عند رفع اليد عن الزر
+                Back.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                Handler().postDelayed({
+                    textView3.visibility = View.INVISIBLE
+                    Handler().postDelayed({
+
+                        textView3.visibility = View.VISIBLE
+                        view3jd.visibility = View.INVISIBLE
+                        for (playButton in playButtons) {
+                            playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+                        }
+                        textView3.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+
+
+
+
+
+                    }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                }, 175) // تأخير لمدة 200 ميلي ثانية
+
+            }
+        }
+        false
+    }
+    /*
+
+
+
+
+            textView4.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView4.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView4.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView4.visibility = View.INVISIBLE
+                                view4jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView4.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView4.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView4.visibility = View.INVISIBLE
+                                view4jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+            textView5.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView5.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView5.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView5.visibility = View.INVISIBLE
+                                view5jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView5.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView5.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView5.visibility = View.INVISIBLE
+                                view5jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+
+            textView6.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView6.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView6.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView6.visibility = View.INVISIBLE
+                                view6jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView6.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView6.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView6.visibility = View.INVISIBLE
+                                view6jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+
+
+            textView7.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView7.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView7.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView7.visibility = View.INVISIBLE
+                                view7jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView7.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+
+                            textView7.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView7.visibility = View.INVISIBLE
+                                view7jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+
+            textView8.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView8.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView8.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView8.visibility = View.INVISIBLE
+                                view8jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView8.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView8.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView8.visibility = View.INVISIBLE
+                                view8jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+
+
+            textView9.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView9.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView9.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView9.visibility = View.INVISIBLE
+                                view9jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView9.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView9.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView9.visibility = View.INVISIBLE
+                                view9jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+            }
+
+
+            textView10.setOnTouchListener { view, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // تأثير عند الضغط على الزر
+                        textView10.animate().scaleX(1.50f).scaleY(1.50f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView10.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView10.visibility = View.INVISIBLE
+                                view10jd.visibility = View.VISIBLE
+                                textViewExam.visibility = View.VISIBLE
+                                EXAM.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // تأثير عند رفع اليد عن الزر
+                        textView10.animate().scaleX(0.8f).scaleY(0.8f).setDuration(100).start()
+                        Handler().postDelayed({
+                            textView10.visibility = View.VISIBLE
+                            Handler().postDelayed({
+
+                                textView10.visibility = View.INVISIBLE
+                                view10jd.visibility = View.VISIBLE
+                                imageHome.visibility = View.VISIBLE
+                                textViewBack.visibility = View.VISIBLE
+                                textViewHome.visibility = View.VISIBLE
+                                Back.visibility = View.VISIBLE
+                                for (playButton in playButtons) {
+                                    playButton.visibility = View.VISIBLE // أو View.INVISIBLE أو View.GONE
+                                }
+                            }, 175) // تأخير لمدة ثانية واحدة (1000 ميلي ثانية)
+                        }, 175) // تأخير لمدة 200 ميلي ثانية
+
+                    }
+                }
+                false
+
+            }
+           */
+
+
+
+    mediaPlayer = arrayOf(
+        MediaPlayer.create(this, R.raw.a1),
+        MediaPlayer.create(this, R.raw.b2),
+        MediaPlayer.create(this, R.raw.a2),
+        MediaPlayer.create(this, R.raw.b2),
+        MediaPlayer.create(this, R.raw.a3),
+        MediaPlayer.create(this, R.raw.b3),
+        MediaPlayer.create(this, R.raw.a4),
+        MediaPlayer.create(this, R.raw.b4),
+        MediaPlayer.create(this, R.raw.a5),
+        MediaPlayer.create(this, R.raw.b5),
+    )
+
+    playButtons = arrayOf(
+        findViewById(R.id.button_play_sound1),
+        findViewById(R.id.button_play_sound2),
+        findViewById(R.id.button_play_sound3),
+        findViewById(R.id.button_play_sound4),
+        findViewById(R.id.button_play_sound5),
+        findViewById(R.id.button_play_sound6),
+        findViewById(R.id.button_play_sound7),
+        findViewById(R.id.button_play_sound8),
+        findViewById(R.id.button_play_sound9),
+        findViewById(R.id.button_play_sound10),
+    )
+
+    isPlaying = BooleanArray(mediaPlayer.size)
+
+    for (i in playButtons.indices) {
+        playButtons[i].setOnClickListener(this)
+    }
+}
+
+override fun onClick(v: View?) {
+    for (i in playButtons.indices) {
+        if (v == playButtons[i]) {
+            if (isPlaying[i]) {
+                mediaPlayer[i].pause()
+                mediaPlayer[i].seekTo(0)
+                isPlaying[i] = false
+                playButtons[i].setCompoundDrawablesWithIntrinsicBounds(
+                    resources.getDrawable(R.drawable.playss),
+                    null,
+                    null,
+                    null
+                )
+            } else {
+                for (j in mediaPlayer.indices) {
+                    if (isPlaying[j]) {
+                        mediaPlayer[j].pause()
+                        mediaPlayer[j].seekTo(0)
+                        isPlaying[j] = false
+                        playButtons[j].setCompoundDrawablesWithIntrinsicBounds(
+                            resources.getDrawable(R.drawable.playss),
+                            null,
+                            null,
+                            null
+                        )
+                    }
+                }
+                mediaPlayer[i].start()
+                isPlaying[i] = true
+                playButtons[i].setCompoundDrawablesWithIntrinsicBounds(
+                    resources.getDrawable(R.drawable.pausess),
+                    null,
+                    null,
+                    null
+                )
+            }
+            break
+        }
+    }
+}
+override fun onStop() {
+    super.onStop()
+    for (i in mediaPlayer.indices) {
+        if (mediaPlayer[i].isPlaying) {
+            mediaPlayer[i].pause()
+            isPlaying[i] = false
+            playButtons[i].setCompoundDrawablesWithIntrinsicBounds(
+                resources.getDrawable(R.drawable.playss),
+                null,
+                null,
+                null
+            )
+        }
+    }
+}
+override fun onBackPressed() {
+    textView1.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView2.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView3.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView4.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView5.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView6.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView7.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView8.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView9.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+    textView10.animate().scaleX(1f).scaleY(1f).setDuration(100).start()
+
+    view1jd.visibility = View.INVISIBLE
+    view2jd.visibility = View.INVISIBLE
+    view3jd.visibility = View.INVISIBLE
+    view4jd.visibility = View.INVISIBLE
+    view5jd.visibility = View.INVISIBLE
+    view6jd.visibility = View.INVISIBLE
+    view7jd.visibility = View.INVISIBLE
+    view8jd.visibility = View.INVISIBLE
+    view9jd.visibility = View.INVISIBLE
+    view10jd.visibility = View.INVISIBLE
+
+
+    imageHome.visibility = View.VISIBLE
+    textViewHome.visibility = View.VISIBLE
+    textViewBack.visibility = View.INVISIBLE
+    Back.visibility = View.INVISIBLE
+    textViewExam.visibility = View.INVISIBLE
+    EXAM.visibility = View.INVISIBLE
+    for (playButton in playButtons) {
+        playButton.visibility = View.INVISIBLE // أو View.INVISIBLE أو View.GONE
+        textView1.visibility = View.VISIBLE
+        textView2.visibility = View.VISIBLE
+        textView3.visibility = View.VISIBLE
+        textView4.visibility = View.VISIBLE
+        textView5.visibility = View.VISIBLE
+        textView6.visibility = View.VISIBLE
+        textView7.visibility = View.VISIBLE
+        textView8.visibility = View.VISIBLE
+        textView9.visibility = View.VISIBLE
+        textView10.visibility = View.VISIBLE
+
+
+
+
+
+
+
+
+
+
+
+
+
+        for (i in mediaPlayer.indices) {
+            if (mediaPlayer[i].isPlaying) {
+                mediaPlayer[i].pause()
+                isPlaying[i] = false
+                playButtons[i].setCompoundDrawablesWithIntrinsicBounds(
+                    resources.getDrawable(R.drawable.playss),
+                    null,
+                    null,
+                    null
+                )
+            }
+        }
+    }
+}
